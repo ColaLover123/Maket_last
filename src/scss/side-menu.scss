@@ -2,7 +2,7 @@
   position: absolute;
   background-color: $item-background;
   width: 375px;
-  height: 1024px;
+  height: 100%;
   left: 0;
   top: 80px;
   z-index: 2;
@@ -110,7 +110,6 @@
 @media (min-width: 768px) {
   .side-menu {
     max-width: 373px;
-    height: 1024px;
     box-shadow: 16px 0px 52px 0px rgba(14, 24, 80, 0.2),
       -2px 0px 4px 0px rgba(69, 79, 126, 0.02);
   }

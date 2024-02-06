@@ -24,6 +24,8 @@ const headerMargin = document.querySelector('.header_wrapper')
 
 const searchIcon = document.getElementById('search-icon')
 let shadow = document.querySelector('.shadow')
+const hideShadow = () => shadow.classList.add('hidden')
+const showShadow = () => shadow.classList.remove('hidden')
 
 let menuIsHidden = true
 
@@ -66,23 +68,54 @@ let hideMenu = () => {
   document.querySelector('.header-nav__list').classList.add('hidden')
 }
 
-menuBtn.addEventListener('click', () => {
+const toggleMenu = () => {
   if (menuIsHidden) {
     showMenu()
   } else {
     hideMenu()
   }
-})
+}
+
+const hideAll = () => {
+  if (!orderCallModal.classList.contains('hidden')) {
+    orderCallModal.classList.add('hidden')
+  }
+
+  if (!sideMenu.classList.contains('hidden')) {
+    hideMenu()
+  }
+
+  if (!responsivenessModal.classList.contains('hidden')) {
+    responsivenessModal.classList.add('hidden')
+  }
+
+  if (!shadow.classList.contains('hidden')) {
+    hideShadow()
+  }
+}
+
+menuBtn.onclick = toggleMenu
+shadow.onclick = hideAll
 
 // order-call
 
 let orderCallBtn = document.querySelector('#order-call')
 let orderCallModal = document.querySelector('.feedback')
 let closeBtn = document.querySelectorAll('.feedback-img')
+const closeBtnFeedback = document.querySelector(
+  '.feedback-wrapper .feedback-img'
+)
+
+closeBtnFeedback.onclick = () => {
+  if (document.querySelector('.side-menu').classList.contains('hidden')) {
+    hideShadow()
+  }
+  orderCallModal.classList.add('hidden')
+}
 
 orderCallBtn.addEventListener('click', () => {
   orderCallModal.classList.remove('hidden')
-  shadow.classList.remove('hidden')
+  showShadow()
   if (!document.querySelector('.side-menu').classList.contains('hidden')) {
     hideMenu()
   }
@@ -90,7 +123,7 @@ orderCallBtn.addEventListener('click', () => {
 
 closeBtn[0].addEventListener('click', () => {
   if (document.querySelector('.side-menu').classList.contains('hidden')) {
-    shadow.classList.add('hidden')
+    hideShadow()
   }
   orderCallModal.classList.add('hidden')
 })
@@ -100,7 +133,7 @@ let responsivenessModal = document.querySelector('.responsiveness')
 
 responsivenessBtn.addEventListener('click', () => {
   responsivenessModal.classList.remove('hidden')
-  shadow.classList.remove('hidden')
+  showShadow()
   if (!document.querySelector('.side-menu').classList.contains('hidden')) {
     hideMenu()
   }
@@ -108,6 +141,6 @@ responsivenessBtn.addEventListener('click', () => {
 closeBtn[1].addEventListener('click', () => {
   responsivenessModal.classList.add('hidden')
   if (document.querySelector('.side-menu').classList.contains('hidden')) {
-    shadow.classList.add('hidden')
+    hideShadow()
   }
 })
